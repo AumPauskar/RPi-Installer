@@ -79,12 +79,15 @@ if [ $choice == "y" ]; then
 	sudo pip uninstall tensorflow -y
 	sudo pip3 uninstall tensorflow -y
 	echo " "
-	echo "Installing dependencies"
+	echo "Installing dependencies..."
 	sleep 1
+	echo "Installing fortrain for raspberry pi"
 	apt install gfortran -y
+	echo "Installing other dependencies"
 	apt install libhdf5-dev libc-ares-dev libeigen3-dev -y
 	apt install libatlas-base-dev libopenblas-dev libblas-dev -y
 	apt install openmpi-bin libopenmpi-dev -y
+	echo "Installing cython for raspberry pi"
 	apt install liblapack-dev cython -y
 	pip3 install keras_applications==1.0.8 --no-deps
 	pip3 install keras_preprocessing==1.1.0 --no-deps
@@ -92,10 +95,10 @@ if [ $choice == "y" ]; then
 	-H pip3 install pybind11
 	-H pip3 install h5py==2.10.0
 	echo " "
-	echo "Upgrading set up tools"
+	echo "Upgrading set up tools if neccessary"
 	-H pip3 install --upgrade setuptools
 	echo " "
-	echo "Downloading the wheel"
+	echo "Downloading tensorflow wheel"
 	wget https://github.com/Qengineering/Tensorflow-Raspberry-Pi/raw/master/tensorflow-2.1.0-cp37-cp37m-linux_armv7l.whl
 	echo " "
 	echo "Installing tensorflow from the wheel"
