@@ -17,6 +17,7 @@ echo "4. CMUS - terminal music player"
 echo "5. PIP - python package manager"
 echo "6. MySQL (mariadb) - database management system"
 echo "7. Neofetch - The ultimate linux flex tool for Windows users"
+echo "8. Git - The definitive version control system"
 sleep 1
 
 # Lists out all the processes and sub processes the program will do
@@ -24,6 +25,7 @@ echo " "
 echo "The program will also make the following processes"
 echo "Make a directory structure in the root folder"
 echo "Install all the required packages in pip: discord, tensorflow, opencv, beautifulsoup4, pygame, requests, pyperclip, mathplotlib, ursina, jupyter"
+echo "Configure git"
 sleep 1
 
 # If else statement for installation
@@ -32,6 +34,10 @@ read choice
 
 # main if else statement
 if [ $choice == "y" ]; then
+	echo "Enter your full name: "
+	read git_name
+	echo "Enter your email: "
+	read git_email
 	echo "Installing the given programs"
 	sleep 1
 	echo " "
@@ -124,6 +130,16 @@ if [ $choice == "y" ]; then
 	sleep 1
 
 	echo "All pip packages installed"
+
+	echo "Making file structure"
+	sleep 1
+	echo "Creating Documents, Images, Downloads, Music, Videos"
+	sleep 1
+	mkdir Documents
+	mkdir Images
+	mkdir Downloads
+	mkdir Music
+	mkdir Videos
 	echo "---------------------------------------------"
 	echo "Do you want to reboot the system?(y/n)"
 	read choice_reboot
