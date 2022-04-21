@@ -7,8 +7,7 @@ sleep 2
 echo " "
 echo " "
 
-echo "Installatall GUI programs (y)"
-read inst
+
 sleep 1
 
 
@@ -39,6 +38,8 @@ read choice
 
 # main if else statement
 if [ $choice == "y" ]; then
+	echo "Install GUI programs (y)"
+	read gui_install
 	echo "Make seperate file directories?"
 	echo "(not necessary for GUI installation)"
 	read f_dir
@@ -74,10 +75,13 @@ if [ $choice == "y" ]; then
 	echo " "
 	echo "Installing neofetch"
 	apt install neofetch -y
+	echo " "
 	echo "Installing cmatrix"
 	apt install cmatrix -y
+	echo " "
 	echo "Installing steam locomotive"
 	apt install sl -y
+	echo " "
 	echo "Installing and configuring MySQl (mariadb)"
 	sleep 1
 	apt install mariadb-server -y
@@ -142,6 +146,27 @@ if [ $choice == "y" ]; then
 
 	echo "All pip packages installed"
 
+
+	if [ $gui_install == "y" ]; then
+		echo "Installing GUI specific information"
+		echo "Consists of VS Code, Chromium web browser, VLC Media Player, GIMP and Libre Office"
+		sleep 1
+		echo "Installing chromium web browser"
+		apt install chromium-browser -y
+		echo " "
+		echo "Installing vlc media player"
+		apt install vlc -y
+		echo " "
+		echo "Installing VS Code"
+		apt install code -y
+		echo " "
+		echo "Installing Libre Office"
+		apt install libreoffice -y
+		echo " "
+		echo "Installing GIMP"
+		apt install gimp
+		echo " "
+	fi
 	if [ $f_dir == "y" ]; then
 		echo "Making file structure"
 		sleep 1
@@ -168,8 +193,10 @@ if [ $choice == "y" ]; then
 		echo "---------------------------------------------"
 		echo "Do you want to reboot the system?(y/n)"
 		read choice_reboot
+	elif [ $f_dir == "n" ]; then
+		echo "File system untouched"
 	fi
-	
+
 	# nested if else statement
 	if [ $choice_reboot == "y" ]
 	then
@@ -195,7 +222,7 @@ if [ $choice == "y" ]; then
 		sleep 1
 		echo "Rebooting now"
 		
-		exit && reboot
+		reboot
 
 	elif [ $choice_reboot == "n" ]
 	then
