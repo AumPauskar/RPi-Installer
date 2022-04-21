@@ -7,6 +7,11 @@ sleep 2
 echo " "
 echo " "
 
+echo "Installatall GUI programs (y)"
+read inst
+sleep 1
+
+
 # Lists out all the installation packages
 echo "The following installer will do the given tasks"
 echo "Update the system and install the following programs"
@@ -34,15 +39,17 @@ read choice
 
 # main if else statement
 if [ $choice == "y" ]; then
+	echo "Make seperate file directories?"
+	echo "(not necessary for GUI installation)"
+	read f_dir
 	echo "Enter your full name: "
 	read git_name
+	git config --global user.name git_name
 	echo "Enter your email: "
 	read git_email
+	git config --global user.email git_email
 	echo "Installing the given programs"
 	sleep 1
-	echo " "
-	echo "Logging in as root user"
-	echo "Please enter your password if prompted"
 	echo " "
 	echo "Updating the system"
 	apt update
@@ -67,9 +74,13 @@ if [ $choice == "y" ]; then
 	echo " "
 	echo "Installing neofetch"
 	apt install neofetch -y
+	echo "Installing cmatrix"
+	apt install cmatrix -y
+	echo "Installing steam locomotive"
+	apt install sl -y
 	echo "Installing and configuring MySQl (mariadb)"
 	sleep 1
-	apt install mariadb-serve -y
+	apt install mariadb-server -y
 	echo "All apps installed"
 	sleep 1
 	echo "Installing pip packages"
@@ -131,18 +142,33 @@ if [ $choice == "y" ]; then
 
 	echo "All pip packages installed"
 
-	echo "Making file structure"
-	sleep 1
-	echo "Creating Documents, Images, Downloads, Music, Videos"
-	sleep 1
-	mkdir Documents
-	mkdir Images
-	mkdir Downloads
-	mkdir Music
-	mkdir Videos
-	echo "---------------------------------------------"
-	echo "Do you want to reboot the system?(y/n)"
-	read choice_reboot
+	if [ $f_dir == "y" ]; then
+		echo "Making file structure"
+		sleep 1
+		echo "Creating Documents, Images, Downloads, Music, Videos"
+		sleep 1
+		mkdir Documents
+		mkdir Images
+		mkdir Downloads
+		mkdir Music
+		mkdir Videos
+		echo "Base file structure created"
+		sleep 1
+		echo "Creating program file structure"
+		cd Documents
+		mkdir Scripts
+		mkdir Python
+		mkdir C
+		mkdir Bash
+		cd
+		sleep 1
+		echo "Program file structure created"
+		sleep 1
+		echo "File structure done"
+		echo "---------------------------------------------"
+		echo "Do you want to reboot the system?(y/n)"
+		read choice_reboot
+	fi
 	
 	# nested if else statement
 	if [ $choice_reboot == "y" ]
